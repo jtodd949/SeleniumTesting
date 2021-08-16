@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="parallel Suite" parallel="tests">
+	<!-- <groups> <run> <include name="bvt"></include> <exclude name="smoke"></exclude> 
+		</run> </groups> 
+
+	<listeners>
+		<listener class-name="customlisteners.listeners"></listener>
+		<listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
+
+	</listeners>
+	-->
+
+	<test name="firefox">
+	<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="paralleltest.testbrowser" />
+		</classes>
+	</test> <!-- Test -->
+	
+	<test name="chrome test">
+	<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="paralleltest.testbrowser" />
+		</classes>
+	</test> <!-- Test -->
+
+</suite> <!-- Suite -->
