@@ -122,6 +122,7 @@ public class SmokeTest {
 
 	@Test(priority = 4)
 	public void enableVault() throws InterruptedException {
+		System.out.println("Enable vault Test");
 		// go to vaults
 		driver.findElement(By.id("codigo-success-link")).click();
 		driver.findElement(By.xpath("//*[@id=\"VaultTable_wrapper\"]/div[7]/div/button[2]")).click();
