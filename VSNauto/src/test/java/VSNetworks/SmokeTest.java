@@ -42,17 +42,30 @@ public class SmokeTest {
 
 	@AfterClass(alwaysRun = true)
 	public void tearDown() throws Exception {
+		// delete media system
+		driver.findElement(By.xpath("//*[@id=\"cms-menu\"]/ul/li[3]/a")).click();
+		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td[1]/a")).click();
+		driver.findElement(By.linkText("Selenium Test Player")).click();
+		driver.findElement(By.id("delete-machine")).click();
+		driver.switchTo().alert().accept();
+		Thread.sleep(2000);
+		//delete location
+		driver.findElement(By.id("delete-location")).click();
+		driver.switchTo().alert().accept();
+		Thread.sleep(2000);
 		// delete company
-//		driver.findElement(By.linkText("Managers")).click();
-//		driver.findElement(By.xpath("//*[@id=\"manager_xdlgkikg\"]/thead/tr/th[1]/input")).sendKeys("Selenium");
-//		driver.findElement(By.xpath("//*[@id=\"manager_xdlgkikg\"]/tbody/tr/td[3]/a[3]/button/span")).click();
-//		driver.findElement(By.xpath("//*[@id=\"confirm\"]")).click();
+		driver.findElement(By.linkText("Admin")).click();
+		driver.findElement(By.linkText("Managers")).click();
+		driver.findElement(By.xpath("//*[@id=\"manager_xdlgkikg\"]/thead/tr/th[1]/input")).sendKeys("Selenium");
+		driver.findElement(By.xpath("//*[@id=\"manager_xdlgkikg\"]/tbody/tr/td[3]/a[3]/button/span")).click();
+		driver.findElement(By.xpath("//*[@id=\"confirm\"]")).click();
 		// kill driver
 		driver.quit();
 	}
 
 	@Test(priority = 1)
 	public void newManager() throws InterruptedException {
+		System.out.println("New manager test");
 		// go to managers
 		driver.findElement(By.linkText("Managers")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div/div/div[2]/div[1]")).click();
@@ -67,12 +80,17 @@ public class SmokeTest {
 	}
 
 	@Test(priority = 2, enabled = false)
-	public void newUser() throws InterruptedException, AWTException {
+	public void newUser() throws InterruptedException {
+		System.out.println("New user test");
 		// go to users
 		driver.findElement(By.xpath("//*[@id=\"side-menu\"]/li[4]/a")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div/div/div[2]/div[1]/button")).click();
 		driver.findElement(By.linkText("Create User")).click();
 		// user page
+		driver.findElement(By.id("select2-drop-mask")).click();
+		driver.findElement(By.id("select2-result-label-6")).click();
+		driver.findElement(By.id("select2-chosen-2")).click();
+		driver.findElement(By.className("select2-result-label")).click();
 		driver.findElement(By.xpath("//*[@id=\"s2id_group-list\"]/a")).click();
 		driver.findElement(By.xpath("//*[@id=\"select2-results-1\"]/li[2]")).click();
 		driver.findElement(By.id("username")).sendKeys("New Selenium User");
@@ -90,11 +108,12 @@ public class SmokeTest {
 
 	@Test(priority = 3, enabled = false)
 	public void changePassword() {
-
+		System.out.println("Change password test");
 	}
 
 	@Test(priority = 4)
 	public void newLocation() throws InterruptedException {
+		System.out.println("New location test");
 		// go to locations
 		driver.findElement(By.linkText("Selenium Test Company")).click();
 		driver.findElement(By.linkText("Add a Location")).click();
@@ -111,6 +130,7 @@ public class SmokeTest {
 
 	@Test(priority = 5)
 	public void newMediaSystem() throws InterruptedException {
+		System.out.println("New media system test");
 		// go to media systems
 		driver.findElement(By.linkText("Add a Media System")).click();
 		// fill out system
@@ -119,17 +139,24 @@ public class SmokeTest {
 		
 		driver.findElement(By.id("s2id_content-packages-select")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("codigo template" + Keys.ENTER);
+		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("codigo template");
+		Thread.sleep(10000);
+		driver.findElement(By.className("select2-result-label")).click();
+		Thread.sleep(10000);
 		
+		driver.findElement(By.id("s2id_content-packages-select")).click();
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("honda power equipment");
+		Thread.sleep(1000);
+		driver.findElement(By.className("select2-result-label")).click();
 		Thread.sleep(10000);
 
-//		driver.findElement(By.id("s2id_content-packages-select")).click();
-//		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("honda power equipment");
-//		Thread.sleep(1000);
-//
-//		driver.findElement(By.id("s2id_content-packages-select")).click();
-//		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("smartplay - ace hardware");
-//		Thread.sleep(1000);
+		driver.findElement(By.id("s2id_content-packages-select")).click();
+		Thread.sleep(10000);
+		driver.findElement(By.xpath("//*[@id=\"s2id_autogen1\"]")).sendKeys("smartplay - ace hardware");
+		Thread.sleep(1000);
+		driver.findElement(By.className("select2-result-label")).click();
+		Thread.sleep(10000);
 		
 		//save
 		driver.findElement(By.xpath("//*[@id=\"machine-form\"]/div[6]/div/button")).click();
@@ -137,7 +164,8 @@ public class SmokeTest {
 	}
 	
 	@Test(priority = 6)
-	public void deviceControls() {
+	public void deviceControls() throws InterruptedException {
+		System.out.println("Device controls test");
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div/ul/li[1]")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div")).click();
@@ -146,7 +174,57 @@ public class SmokeTest {
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div/ul/li[3]")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div")).click();
 		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div/ul/li[4]")).click();
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div")).click();
-		driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div/ul/li[5]")).click();
+		//driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div")).click();
+		//driver.findElement(By.xpath("//*[@id=\"wrapper\"]/div/div/div[2]/div/div/div/ul/li[5]")).click();
+		Thread.sleep(5000);
+	}
+	
+	@Test(priority = 7)
+	public void scheduleContent() throws InterruptedException {
+		System.out.println("Schedule content test");
+		// go to media
+		driver.findElement(By.id("manage-content-btn")).click();
+		driver.findElement(By.id("navigation-tabs-tab-content-library")).click();
+		// subscribe to content
+		driver.findElement(By.xpath("(//button[@type='button'])[10]")).click();
+		// create channels
+		driver.findElement(By.id("navigation-tabs-tab-my-content")).click();
+		driver.findElement(By.xpath("(//button[@type='button'])[11]")).click();
+		driver.findElement(By.xpath("(//input[@type='text'])[5]")).sendKeys("Apps" + Keys.ENTER);
+		// add app
+		driver.findElement(By.xpath("(//button[@type='button'])[9]")).click();
+		driver.findElement(By.xpath("(//img[@alt='Ace Hardware Twitter']")).click();
+		driver.findElement(By.className("btn btn-primary")).click();
+		// update
+		driver.findElement(By.xpath("(//button[@type='button'])[4]")).click();
+		driver.findElement(By.xpath("xpath=(//button[@type='button'])[15]")).click();
+	}
+	
+	@Test(priority = 8)
+	public void scheduleYoutube() throws InterruptedException {
+		System.out.println("Schedule Youtube test");
+		// add from youtube
+		driver.findElement(By.xpath("(//button[@type='button'])[8]")).click();
+		driver.findElement(By.xpath("(//input[@type='text'])[7]")).sendKeys("https://youtu.be/HL9kaJZw8iw");
+		driver.findElement(By.xpath("xpath=(//button[@type='button'])[15]")).click();
+		driver.findElement(By.xpath("xpath=(//button[@type='button'])[15]")).click();
+	}
+	
+	@Test(priority = 9)
+	public void scheduleCodigo() throws InterruptedException {
+		System.out.println("Schedule Codigo test");
+		// add codigo template
+		driver.findElement(By.xpath("(//button[@type='button'])[10]")).click();
+		driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/div[2]/div/div/div[3]/div[1]/button/img")).click();
+		driver.findElement(By.xpath("xpath=(//button[@type='button'])[17]")).click();
+	}
+	
+	@Test(priority = 10)
+	public void editCodigo() throws InterruptedException {
+		System.out.println("Edit Codigo test");
+		// open codigo content
+		driver.findElement(By.xpath("//*[@id=\"navigation-tabs-pane-my-content\"]/div/div[2]/div[2]/ul/li[1]/div[1]/img[2]")).click();
+		driver.findElement(By.id("media-asset-dialog-tabs-tab-settings")).click();
+		driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/div[2]/button[1]")).click();s
 	}
 }
