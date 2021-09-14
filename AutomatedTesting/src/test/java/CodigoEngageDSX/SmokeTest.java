@@ -124,6 +124,7 @@ public class SmokeTest {
 	public void enableVault() throws InterruptedException {
 		System.out.println("Enable vault Test");
 		// go to vaults
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("Content Vaults")).click();
 		driver.findElement(By.xpath("//*[@id=\"VaultTable_wrapper\"]/div[7]/div/button[2]")).click();
 		driver.findElement(By.id("VaultTable_search")).sendKeys("landscape");
