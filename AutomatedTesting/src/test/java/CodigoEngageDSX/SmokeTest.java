@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -30,8 +30,8 @@ public class SmokeTest {
 
 	@BeforeClass(alwaysRun = true)
 	public void setUp() throws Exception {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		WebDriverManager.firefoxdriver().setup();
+		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("https://codigo.gocodigo.net");
 		driver.manage().window().maximize();
@@ -155,6 +155,7 @@ public class SmokeTest {
 	public void newHub() throws InterruptedException {
 		System.out.println("New hub test");
 		// go to hubs
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("Network")).click();
 		driver.findElement(By.linkText("Hubs")).click();
 		driver.findElement(By.linkText("New Hub")).click();
